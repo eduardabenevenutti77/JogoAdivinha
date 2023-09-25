@@ -4,12 +4,12 @@
 palpite = 0
 from random import randint
 
-pensaNumero = randint(0,10)
+pensaNumero = randint(0,100)
 
 #sorteio = random.choice(pensaNumero)
 c = False
 while not c:
-    numUsuario = int(input("\n Informe um valor que esteja em 0 à 10 => "))
+    numUsuario = int(input("\n Informe um valor que esteja em 0 à 100 => "))
     palpite += 1
     if numUsuario == pensaNumero:
         c = True
