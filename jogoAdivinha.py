@@ -1,21 +1,28 @@
-#Faça um programa em que o computador pense num número de 0 a 10, e o jogador vai adivinhar até acertar.
-#Mostre na tela a quantidade de palpites gastos para vencer o desafio
-
-palpite = 0
+from flask import Flask, render_template, request, jsonify
 from random import randint
 
-pensaNumero = randint(0,100)
+app = Flask(__name__)
+pensaNumero = randint(0, 100)
+palpite = 0
 
-#sorteio = random.choice(pensaNumero)
-c = False
-while not c:
-    numUsuario = int(input("\n Informe um valor que esteja em 0 à 100 => "))
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/adivinhar', methods=['POST'])
+def adivinhar():
+    global palpite
     palpite += 1
+    numUsuario = int(request.form['numero'])
+    resposta = ''
     if numUsuario == pensaNumero:
-        c = True
+        resposta = f"Parabéns! Você acertou o número em {palpite} palpites!"
+        palpite = 0
+    elif numUsuario < pensaNumero:
+        resposta = "O valor é maior, tente novamente..."
     else:
-        if numUsuario < pensaNumero:
-            print(" O valor é maior, tente novamente....")
-        elif numUsuario > pensaNumero:
-            print(" O valor é menor, tente novamente....")
-print("\n Foram necessário {} palpites para acertar o número escolhido pelo computador!!".format(palpite))
+        resposta = "O valor é menor, tente novamente..."
+    return jsonify(resposta=resposta)
+
+if __name__ == '__main__':
+    app.run(debug=True)
