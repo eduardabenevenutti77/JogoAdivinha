@@ -1,4 +1,4 @@
-como implementar um frontend com html e css neste código em py - #Faça um programa em que o computador pense num número de 0 a 10, e o jogador vai adivinhar até acertar.
+#Faça um programa em que o computador pense num número de 0 a 10, e o jogador vai adivinhar até acertar.
 #Mostre na tela a quantidade de palpites gastos para vencer o desafio
 
 palpite = 0
